@@ -22,9 +22,16 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate changelog
+        id: changelog
         uses: metcalfc/changelog-generator@v3.0.0
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Get the changelog
+        run: |
+          cat << "EOF"
+          ${{ steps.changelog.outputs.changelog }}
+          EOF
 
       - name: Create release
         uses: actions/create-release@latest
@@ -35,5 +42,5 @@ jobs:
           release_name: "Versione ${{ github.event.inputs.version }}"
           body: ${{ steps.changelog.outputs.changelog }}
           draft: false
-          prerelease: ${{ github.event.inputs.prerelase == 'TRUE' }}
+          prerelease: ${{ github.event.inputs.prerelease == 'TRUE' }}
           
