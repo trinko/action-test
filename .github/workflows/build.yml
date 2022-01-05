@@ -20,13 +20,13 @@ jobs:
         run: |
           echo "PUSH"
 
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
       - name: Release Print
         if: github.event_name == 'workflow_run'
         run: |
-          echo "Versione: ${GITHUB_REF/refs\/tags\//}"
-          echo "Versione2: ${{GITHUB_REF/refs\/tags\//}}"
-          echo "Versione3: ${GITHUB_REF##*/}"
-          echo "Versione4: ${{GITHUB_REF##*/}}"
-          echo "REF: ${{ GITHUB_REF }}"
-
+          echo "Versione: ${{ steps.get_version.outputs.VERSION }}"
     
