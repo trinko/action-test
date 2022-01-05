@@ -11,8 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       
-      -name: Print
-       run: |
-        echo "build versione ${{ github.event.release.tag_name }}"
+      - name: Print
+        if: github.event_name == 'release'
+        run: |
+          echo "build versione ${{ github.event.release.tag_name }}"
 
     
