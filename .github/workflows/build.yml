@@ -20,13 +20,12 @@ jobs:
         run: |
           echo "PUSH"
 
-
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-
+      - name: Release Tag
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"  
+        if: github.event_name == 'workflow_run'
+ 
       - name: Release Print
         if: github.event_name == 'workflow_run'
         run: |
-          echo "Versione: ${{ steps.get_version.outputs.VERSION }}"
-    
+          echo "Versione ${{ steps.previoustag.outputs.tag }}"
