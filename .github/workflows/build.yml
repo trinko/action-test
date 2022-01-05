@@ -15,17 +15,19 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps: 
       
+      - uses: actions/checkout@v2
+      
       - name: Push Print
         if: github.event_name == 'push'
         run: |
           echo "PUSH"
 
       - name: Release Tag
-        id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"  
+        uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
         if: github.event_name == 'workflow_run'
  
       - name: Release Print
         if: github.event_name == 'workflow_run'
         run: |
-          echo "Versione ${{ steps.previoustag.outputs.tag }}"
+          echo "Versione ${{ steps.get-latest-tag.outputs.tag }}"
