@@ -32,7 +32,7 @@ jobs:
           add: download/test --force
           branch: builds
           branch_mode: create
-          pull: 'NO-PULL'
+          push: '--force'
           default_author: github_actor
           message: 'Load build'
           
