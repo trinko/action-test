@@ -20,8 +20,19 @@ jobs:
       - name: Push Print
         if: github.event_name == 'push'
         run: |
-          echo "PUSH"
+          cd download
+          echo "PUSH" > test
+          date >> test
 
+      - name: Add and commit
+        if: github.event_name == 'push'
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: download/test  
+          branch: builds
+          default_author: github_actor
+          message: 'Load build'
+          
       - name: Release Tag
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
