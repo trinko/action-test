@@ -20,6 +20,7 @@ jobs:
       - name: Push Print
         if: github.event_name == 'push'
         run: |
+          mkdir download
           cd download
           echo "PUSH" > test
           date >> test
