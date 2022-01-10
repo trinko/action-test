@@ -32,7 +32,7 @@ jobs:
           add: download/test --force
           branch: builds
           branch_mode: create
-          push: '--force'
+          push: '--force --set-upstream origin builds'
           default_author: github_actor
           message: 'Load build'
           
