@@ -33,6 +33,7 @@ jobs:
           branch: builds
           branch_mode: create
           push: '--force --set-upstream origin builds'
+          pull: 'NO-PULL'
           default_author: github_actor
           message: 'Load build'
           
