@@ -40,6 +40,7 @@ jobs:
           
       - name: create changelog page
         run: |
+          mkdir docs
           echo "---" > docs/release.md
           echo "layout: default" >> docs/release.md
           echo "---\n\n" >> docs/release.md
