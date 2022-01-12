@@ -43,10 +43,10 @@ jobs:
           mkdir docs
           echo "---" > docs/release.md
           echo "layout: default" >> docs/release.md
-          echo "---\n\n" >> docs/release.md
-          echo "tag: v${{ github.event.inputs.version }}"  >> docs/release.md
-          echo "release: Versione ${{ github.event.inputs.version }}"  >> docs/release.md
-          echo "change-log: ${{ steps.changelog.outputs.changelog }}"  >> docs/release.md
+          echo "---%0D%0D" >> docs/release.md
+          echo "tag: v${{ github.event.inputs.version }}%0D%0D"  >> docs/release.md
+          echo "release: Versione ${{ github.event.inputs.version }}%0D%0D"  >> docs/release.md
+          echo "change-log:%0D ${{ steps.changelog.outputs.changelog }}"  >> docs/release.md
           
       - name: Add and commit
         uses: EndBug/add-and-commit@v7
