@@ -38,7 +38,6 @@ jobs:
           draft: false
           prerelease: ${{ github.event.inputs.prerelease == 'TRUE' }}
           
-
       - name: Copycat
         uses: andstor/copycat-action@v3
         with:
@@ -49,6 +48,15 @@ jobs:
           dst_path: .
           dst_owner: ${{github.repository_owner}}
           dst_repo_name: ${{github.event.repository.name}}
+
+      - name: Publish latest release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: test
+          asset_name: test.txt
+          tag: "v${{ github.event.inputs.version }}"
+
 
       - name: create changelog page
         run: |
