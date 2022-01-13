@@ -50,12 +50,6 @@ jobs:
           echo "release: Versione ${{ github.event.inputs.version }}"  >> docs/release.md
           echo "" >> docs/release.md
           echo "change-log:" >> docs/release.md
-          #set -o noglob
-          #log=$(cat << "EOF"
-          #${{ steps.changelog.outputs.changelog }}
-          #EOF
-          #)
-          #echo "$log"  >> docs/release.md
           echo "${{ steps.changelog.outputs.changelog }}"  >> docs/release.md
           
       - name: Add and commit
