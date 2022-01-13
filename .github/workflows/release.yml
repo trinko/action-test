@@ -38,6 +38,18 @@ jobs:
           draft: false
           prerelease: ${{ github.event.inputs.prerelease == 'TRUE' }}
           
+
+      - name: Copycat
+        uses: andstor/copycat-action@v3
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          src_branch: builds
+          src_path: download/test
+          dst_branch: master
+          dst_path: .
+          dst_owner: ${{github.repository_owner}}
+          dst_repo_name: ${{github.event.repository.name}}
+
       - name: create changelog page
         run: |
           mkdir docs
@@ -62,3 +74,4 @@ jobs:
           pull: 'NO-PULL'
           default_author: github_actor
           message: 'Load page'
+
