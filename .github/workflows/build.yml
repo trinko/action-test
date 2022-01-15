@@ -55,6 +55,7 @@ jobs:
           destination_repo: 'trinko/giuaschool-docs'
           destination_branch: 'master'
           destination_folder: '/'
+          user_name: ${{ github.actor }}
           
 
       - name: Release Tag
