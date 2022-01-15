@@ -36,7 +36,25 @@ jobs:
           pull: 'NO-PULL'
           default_author: github_actor
           message: 'Load build'
-          
+
+      - name: Changelog
+        if: github.event_name == 'push'
+        run: |
+          mkdir docs
+          echo "MODIFICA" > docs/changelog.md
+          date >> docs/changelog.md
+          echo "MODIFICA 2" > docs/changelog2.md
+          date >> docs/changelog2.md
+
+      - name: Add changelog page to documentation
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'docs/changelog.md'
+          destination_repo: 'trinko/giuaschool-docs'
+          user_email: 'example@email.com'
+
       - name: Release Tag
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
