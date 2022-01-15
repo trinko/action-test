@@ -52,11 +52,11 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source_file: 'docs/changelog.md'
+          source_file: 'docs/*.md'
           destination_repo: 'trinko/giuaschool-docs'
           destination_branch: 'master'
           user_name: ${{ github.actor }}
-          user_email: '${{ github.actor }}@email.com'
+          user_email: '${{ github.actor }}@users.noreply.github.com'
           commit_message: 'Add changelog page to documentation'        
         
 
