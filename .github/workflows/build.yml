@@ -49,14 +49,14 @@ jobs:
       - name: Add changelog page to documentation
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
         with:
           source_file: 'docs/changelog.md'
           destination_repo: 'trinko/giuaschool-docs'
           destination_branch: 'master'
           destination_folder: '/'
           user_name: ${{ github.actor }}
-          
+          user_email: '${{ github.actor }}@users.noreply.github.com'
 
       - name: Release Tag
         uses: actions-ecosystem/action-get-latest-tag@v1
