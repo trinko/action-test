@@ -53,7 +53,9 @@ jobs:
         with:
           source_file: 'docs/changelog.md'
           destination_repo: 'trinko/giuaschool-docs'
-          user_email: 'example@email.com'
+          destination_branch: 'master'
+          destination_folder: '/'
+          
 
       - name: Release Tag
         uses: actions-ecosystem/action-get-latest-tag@v1
