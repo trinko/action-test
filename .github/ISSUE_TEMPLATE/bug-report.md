@@ -1,10 +1,9 @@
 ---
 name: Segnalazione di errore
-about: Segnalazione di un errore o malfunzionamento del registro elettronico
-title: "[BUG] "
+about: Segnalazione di un malfunzionamento del registro elettronico
+title: ''
 labels: bug
 assignees: ''
-
 ---
 
 **Descrivi il problema**
