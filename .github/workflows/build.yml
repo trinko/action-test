@@ -25,42 +25,6 @@ jobs:
           echo "PUSH" > test
           date >> test
 
-      - name: Add and commit
-        if: github.event_name == 'push'
-        uses: EndBug/add-and-commit@v7
-        with:
-          add: download/test --force
-          branch: builds
-          branch_mode: create
-          push: '--force --set-upstream origin builds'
-          pull: 'NO-PULL'
-          default_author: github_actor
-          message: 'Load build'
-
-      - name: Changelog
-        if: github.event_name == 'push'
-        run: |
-          mkdir docs
-          echo "MODIFICA" > docs/changelog.md
-          date >> docs/changelog.md
-          echo "MODIFICA 2" > docs/changelog2.md
-          date >> docs/changelog2.md
-
-      
-      - name: Add changelog page to documentation
-        uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source_file: 'docs/*.md'
-          destination_repo: 'trinko/giuaschool-docs'
-          destination_branch: 'master'
-          user_name: ${{ github.actor }}
-          user_email: '${{ github.actor }}@users.noreply.github.com'
-          commit_message: 'Add changelog page to documentation'        
-        
-
-
       - name: Release Tag
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
