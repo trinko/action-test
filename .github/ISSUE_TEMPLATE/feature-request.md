@@ -4,11 +4,10 @@ about: Richiesta di una nuova funzionalità o di un miglioramento di una esisten
 title: ''
 labels: enhancement
 assignees: ''
-
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**La richiesta è legata ad un problema riscontrato? Descrivi il problema**
+Una chiara e sintetica descrizione del problema.
 
 **Descrivi la funzionalità richiesta o da migliorare**
 Una chiara e sintetica descrizione di cosa dovrebbe fare la funzionalità richiesta o da migliorare.
