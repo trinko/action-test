@@ -1,0 +1,25 @@
+# This is a basic workflow to help you get started with Actions
+
+name: test
+
+on:
+   workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - name: Gets latest created release info
+        id: latest_release_info
+        uses: jossef/action-latest-release-info@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Run a multi-line script
+        run: |
+          echo "tag_name: ${{ steps.latest_release_info.outputs.tag_name }}"
+          echo "created_at: ${{ steps.latest_release_info.outputs.created_at }}"
