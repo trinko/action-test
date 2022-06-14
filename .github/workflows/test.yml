@@ -19,6 +19,7 @@ jobs:
         with:
           separator: "\n"
           base_sha: b427822
+          fetch-depth: 0
 
       - name: List all added files
         run: |
