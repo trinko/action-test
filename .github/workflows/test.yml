@@ -18,8 +18,7 @@ jobs:
         uses: tj-actions/changed-files@v23
         with:
           separator: "\n"
-          base_sha: b427822
-          fetch-depth: 0
+          base_sha: b427822536d179c1454352eca3406b190ef0f694
 
       - name: List all added files
         run: |
