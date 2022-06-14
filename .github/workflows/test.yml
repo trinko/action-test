@@ -24,8 +24,5 @@ jobs:
 
       - name: List all added files
         run: |
-         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file"
-         done
          echo "----"
          echo ${{ steps.changed-files.outputs.all_changed_files }}
