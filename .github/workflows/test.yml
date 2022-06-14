@@ -19,8 +19,8 @@ jobs:
         with:
           separator: ","
 
-     - name: List all added files
-       run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was added"
-          done
+      - name: List all added files
+        run: |
+         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file"
+         done
