@@ -19,10 +19,11 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v23
         with:
-          separator: "\n"
+          separator: " "
           base_sha: b427822536d179c1454352eca3406b190ef0f694
 
       - name: List all added files
         run: |
          echo "----"
          echo ${{ steps.changed-files.outputs.all_changed_files }}
+         echo "----"
