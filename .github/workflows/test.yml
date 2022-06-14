@@ -15,18 +15,19 @@ jobs:
         with:
          fetch-depth: 0
          
-      - name: Gets latest created release info
-        id: latest_release_info
-        uses: jossef/action-latest-release-info@v1.1.0
-        env:
-         GITHUB_TOKEN: ${{ github.token }}
-
+      - name: Get Latest Release
+        id: latest_version
+        uses: abatilo/release-info-action@v1.3.0
+        with:
+          owner: trinko
+          repo: action-test
+    
       - name: Get changed files using a comma separator
         id: changed-files
         uses: tj-actions/changed-files@v23
         with:
           separator: " "
-          base_sha: ${{ steps.latest_release_info.outputs.id }}
+          base_sha: ${{ steps.latest_version.outputs.target_commitish }}
 
       - name: List all added files
         run: |
