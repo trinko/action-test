@@ -15,23 +15,26 @@ jobs:
         with:
          fetch-depth: 0
          
-      - name: Get Latest Release
-        id: latest_version
-        uses: abatilo/release-info-action@v1.3.0
+      - uses: cardinalby/git-get-release-action@v1
+        id: latest-release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          owner: trinko
-          repo: action-test
+          latest: true    
+    
     
       - name: Get changed files using a comma separator
         id: changed-files
         uses: tj-actions/changed-files@v23
         with:
           separator: " "
-          base_sha: "8c0b2c8"
+          base_sha: "${{ steps.latest-release.outputs.target_commitish }}"
           
       - name: List all added files
         run: |
-         echo "${{ steps.latest_version.outputs.target_commitish }}"
+         echo "${{ steps.latest-release.outputs.tag_name }}"
+         echo "${{ steps.latest-release.outputs.url }}"
+         echo "${{ steps.latest-release.outputs.target_commitish }}"
          echo "----"
          echo ${{ steps.changed-files.outputs.all_changed_files }}
          echo "----"
