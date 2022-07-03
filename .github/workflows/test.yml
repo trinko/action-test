@@ -31,7 +31,7 @@ jobs:
           
       - name: List all added files
         run: |
-         echo "${{ steps.latest_version.output.target_commitish }}"
+         echo "${{ steps.latest_version.outputs.target_commitish }}"
          echo "----"
          echo ${{ steps.changed-files.outputs.all_changed_files }}
          echo "----"
