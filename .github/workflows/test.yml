@@ -27,8 +27,8 @@ jobs:
         uses: tj-actions/changed-files@v23
         with:
           separator: " "
-          base_sha: ${{ steps.latest_version.outputs.target_commitish }}
-
+          base_sha: "8c0b2c8"
+          
       - name: List all added files
         run: |
          echo "----"
