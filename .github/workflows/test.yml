@@ -25,5 +25,5 @@ jobs:
         run: |
          echo "${{ steps.latest-release.outputs.tag_name }}"
          echo "----"
-         echo "${{ steps.latest-release.outputs.tag_name }:1}"
+         echo "Prova ${ ${{ steps.latest-release.outputs.tag_name }}:1 }"
   
