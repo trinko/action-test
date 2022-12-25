@@ -15,31 +15,15 @@ jobs:
         with:
          fetch-depth: 0
          
-      #- uses: cardinalby/git-get-release-action@v1
-      #  id: latest-release
-      #  env:
-      #    GITHUB_TOKEN: ${{ github.token }}
-      #  with:
-      #    latest: true    
-
       - name: Get latest release tag
         id: latest-release
         uses: jossef/action-latest-release-info@v1.2.0
         env:
           GITHUB_TOKEN: ${{ github.token }}
-  
-    
-      - name: Get changed files using a comma separator
-        id: changed-files
-        uses: tj-actions/changed-files@v23
-        with:
-          separator: " "
-          base_sha: "${{ steps.latest-release.outputs.target_commitish }}"
-          
-      - name: List all added files
+            
+      - name: Test
         run: |
          echo "${{ steps.latest-release.outputs.tag_name }}"
-         echo "${{ steps.latest-release.outputs.target_commitish }}"
          echo "----"
-         echo ${{ steps.changed-files.outputs.all_changed_files }}
-         echo "----"
+         echo "${{ steps.latest-release.outputs.tag_name }:1}"
+  
