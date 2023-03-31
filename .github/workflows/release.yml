@@ -16,70 +16,22 @@ jobs:
   release:
     name: Publish a new release
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+    outputs:
+      tag: ${{ steps.previous-release.outputs.release }}
     steps:
-    
+
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Generate changelog
-        id: changelog
-        uses: metcalfc/changelog-generator@v3.0.0
-        with:
-          myToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      - name: Create release
-        uses: actions/create-release@latest
+      - name: Get latest release tag
+        id: previous-release
+        uses: rez0n/actions-github-release@main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: "v${{ github.event.inputs.version }}"
-          release_name: "Versione ${{ github.event.inputs.version }}"
-          body: ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: ${{ github.event.inputs.prerelease == 'TRUE' }}
-          
-      - name: Copycat
-        uses: andstor/copycat-action@v3
-        with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          src_branch: builds
-          src_path: download/test
-          dst_branch: master
-          dst_path: .
-          dst_owner: ${{github.repository_owner}}
-          dst_repo_name: ${{github.event.repository.name}}
-
-      - name: Publish latest release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: test
-          asset_name: test.txt
-          tag: "v${{ github.event.inputs.version }}"
-
-
-      - name: create changelog page
-        run: |
-          mkdir docs
-          echo "---" > docs/release.md
-          echo "layout: default" >> docs/release.md
-          echo "---" >> docs/release.md
-          echo "" >> docs/release.md
-          echo "tag: v${{ github.event.inputs.version }}"  >> docs/release.md
-          echo "" >> docs/release.md
-          echo "release: Versione ${{ github.event.inputs.version }}"  >> docs/release.md
-          echo "" >> docs/release.md
-          echo "change-log:" >> docs/release.md
-          echo "${{ steps.changelog.outputs.changelog }}"  >> docs/release.md
-          
-      - name: Add and commit
-        uses: EndBug/add-and-commit@v7
-        with:
-          add: docs/release.md --force
-          branch: gh-pages
-          branch_mode: create
-          push: '--force --set-upstream origin gh-pages'
-          pull: 'NO-PULL'
-          default_author: github_actor
-          message: 'Load page'
-
+          token: ${{ github.token }}
+          repository: "iisgiua/giuaschool"
+          type: "stable"
