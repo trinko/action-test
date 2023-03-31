@@ -35,3 +35,13 @@ jobs:
           token: ${{ github.token }}
           repository: "iisgiua/giuaschool"
           type: "stable"
+
+      - uses: ncipollo/release-action@v1
+        with:
+          body: 'prova...'
+          draft: false
+          prerelease: ${{ github.event.inputs.prerelease == 'TRUE' }}
+          tag: "v${{ github.event.inputs.version }}"
+          name: "Versione ${{ github.event.inputs.version }}"
+        
+          
