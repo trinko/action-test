@@ -3,7 +3,10 @@
 name: test
 
 on:
-   workflow_dispatch:
+  push:
+  pull_request:
+    types: [opened, reopened, synchronize]
+      
 
 jobs:
 
@@ -11,20 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - uses: actions/checkout@v3
-        with:
-         fetch-depth: 0
-         
-      - name: Get latest release tag
-        id: latest-release
-        uses: jossef/action-latest-release-info@v1.2.0
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-            
-      - name: Test
+      - name: Check out the repo
+        uses: actions/checkout@v3
+                
+      - name: Debug
         run: |
-         echo "${{ steps.latest-release.outputs.tag_name }}"
-         A="${{ steps.latest-release.outputs.tag_name }}"
-         echo "-> $A"
-         echo "Prova ${A:1}"
-  
+         echo "-->  ${{ github.event_name }}"
+         echo "-->  ${{ github.ref }}"
+   
+      - name: Test
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }} 
+        run: |
+         echo ":::::::::OK DEPLOY"
+        
